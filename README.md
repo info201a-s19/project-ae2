@@ -20,15 +20,24 @@ This visualization allows users an interactive way to explore how each universit
 
 How Weather Affects Music Listening
 https://insights.spotify.com/us/2017/02/07/spotify-accuweather-music-and-weather/
-This project followed the question of whether people make different music-listening decisions based on the weather. Some findings included sunnier days brought higher-energy, happier sounding music, contrastly rainier days people tended to listen to low energy, sadder music. Seattle and Chicago are more impacted by overcast days than rainy ones, and so many more interesting findings. 
+This project followed the question of whether people make different music-listening decisions based on the weather. Some findings included sunnier days brought higher-energy, happier sounding music, contrastly rainier days people tended to listen to low energy, sadder music. Seattle and Chicago are more impacted by overcast days than rainy ones, and so many more interesting findings.
+
+Spotify Music Data Analysis Project:
+https://github.com/AsTimeGoesBy111/Spotify-Music-Data-Analysis
+The Spotify dataset was used to analyze the trend of music development over the past 20 years. The data generated graphs to analyze of popularity trends by genre and numeric features while showing predicted areas of growth in upcoming years.
 
 3. What data-driven questions do you hope to answer about this domain (share at least 3)?
-
+Which countries stream the top songs on the charts the most?
 What artist is common amongst all countries?
 https://spotifycharts.com/regional/
 Finding data
 
 Identify and download at least 3 sources of data related to your domain of interest described above (into a folder you create called data/). You won't be required to use all of these sources, but it will give you practice discovering data. If your data is made available through a Web API, you don't need to download it. For each source of data, provide the following information:
+
+Spotify's Worldwide daily song ranking: Which countries stream the top songs on the charts the most?
+https://www.kaggle.com/edumucelli/spotifys-worldwide-daily-song-ranking
+The data was collected using a crawler created by edumucelli, who has a Ph.D. in Computer Science at École Polytechnique, France.
+There are 7 features in the data - Position, Track Name, artists, streams, url, date, and region and 3441197 rows
 
 Where did you download the data (e.g., a web URL)?
 

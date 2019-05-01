@@ -2,11 +2,22 @@
 Use this `REAMDE.md` file to describe your final project (as detailed on Canvas).
 
 1. Why are you interested in this field/domain?
+Audio is key to pop culture, and is becoming a bigger influencer everyday,
+spreading important messages, such as in podcasts and in songs such as
+"This is America"
 
 2. What other examples of data driven project have you found related to this domain (share at least 3)?
 
+Listening Diversity Increases nearly 40 Percent on Spotify:
+https://insights.spotify.com/us/2017/11/02/listening-diversity-spotify/#comments
+The amount of artists listened to per week in Spotify has dramatically increased
+from 2016 to 2017 due to programmed playlists in Spotify such as
+"Fresh Finds", "Today's Top Hit's", "Summer Rewind", etc.
+
 3. What data-driven questions do you hope to answer about this domain (share at least 3)?
 
+What artist is common amongst all countries?
+https://spotifycharts.com/regional/
 Finding data
 
 Identify and download at least 3 sources of data related to your domain of interest described above (into a folder you create called data/). You won't be required to use all of these sources, but it will give you practice discovering data. If your data is made available through a Web API, you don't need to download it. For each source of data, provide the following information:

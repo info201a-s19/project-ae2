@@ -14,6 +14,14 @@ The amount of artists listened to per week in Spotify has dramatically increased
 from 2016 to 2017 due to programmed playlists in Spotify such as
 "Fresh Finds", "Today's Top Hit's", "Summer Rewind", etc.
 
+How Students Listen - 2017:
+https://insights.spotify.com/us/2017/05/24/how-students-listen-2017/
+This visualization allows users an interactive way to explore how each university listens to music on multiple different levels. It sorts the schools by various audio acoustics and stacks up school in listening frequency and listening diversity. As well as showing top genres for each school and distincitive tracks and artists of each school.
+
+How Weather Affects Music Listening
+https://insights.spotify.com/us/2017/02/07/spotify-accuweather-music-and-weather/
+This project followed the question of whether people make different music-listening decisions based on the weather. Some findings included sunnier days brought higher-energy, happier sounding music, contrastly rainier days people tended to listen to low energy, sadder music. Seattle and Chicago are more impacted by overcast days than rainy ones, and so many more interesting findings. 
+
 3. What data-driven questions do you hope to answer about this domain (share at least 3)?
 
 What artist is common amongst all countries?

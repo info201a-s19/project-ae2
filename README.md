@@ -9,31 +9,33 @@ spreading important messages, such as in podcasts and in songs such as
 Almost everyone listens to music at some point in their day, often as for leisure to relieve stress or to relax or whatnot,
 and it can be insightful to see the trends and interactions of how different locations/cultures/regions share 
 similar musical tastes, or how people connect their music choices to
-other general aspects of everyday life, like mood, time, season, weather, activities, etc.
+other general aspects of everyday life, like mood, time, season, weather, activities, etc.  
+
+The field of music is interesting because it is a big part of our lives. The music a person chooses to listen to is a form of self expression and and can tell a lot about a person's long standing temperament as well as their mood at a given time. Aside from individual insights it can also form connections and bring out insights about different populations in many differing domains and we are interested in exploring what connections can be found in human behaviors and musical interests as well as the increased popularity of podcasts.
 
 ### 2. What other examples of data driven project have you found related to this domain (share at least 3)?
 
 Listening Diversity Increases nearly 40 Percent on Spotify:
-https://insights.spotify.com/us/2017/11/02/listening-diversity-spotify/
-<br/>
+https://insights.spotify.com/us/2017/11/02/listening-diversity-spotify/  
+
 The amount of artists listened to per week in Spotify has dramatically increased
 from 2016 to 2017 due to programmed playlists in Spotify such as
 "Fresh Finds", "Today's Top Hit's", "Summer Rewind", etc.
 
 How Students Listen - 2017:
-https://insights.spotify.com/us/2017/05/24/how-students-listen-2017/
-<br/>
+https://insights.spotify.com/us/2017/05/24/how-students-listen-2017/  
+
 This visualization allows users an interactive way to explore how each university listens to music on multiple different levels. It sorts the schools by various audio acoustics and stacks up school in listening frequency and listening diversity. As well as showing top genres for each school and distincitive tracks and artists of each school.
 
 How Weather Affects Music Listening:
-https://insights.spotify.com/us/2017/02/07/spotify-accuweather-music-and-weather/
-<br/>
+https://insights.spotify.com/us/2017/02/07/spotify-accuweather-music-and-weather/  
+
 This project followed the question of whether people make different music-listening decisions based on the weather. Some findings included sunnier days brought higher-energy, happier sounding music, contrastly rainier days people tended to listen to low energy, sadder music. Seattle and Chicago are more impacted by overcast days than rainy ones, and so many more interesting findings.
 
 Spotify Music Data Analysis Project:
-https://github.com/AsTimeGoesBy111/Spotify-Music-Data-Analysis
-<br/>
-The Spotify dataset was used to analyze the trend of music development over the past 20 years. The data generated graphs to analyze of popularity trends by genre and numeric features while showing predicted areas of growth in upcoming years.
+https://github.com/AsTimeGoesBy111/Spotify-Music-Data-Analysis  
+
+The Spotify dataset was used to analyze the trend of music development over the past 20 years. The data generated graphs to analyze of popularity trends by genre and numeric features while showing predicted areas of growth in upcoming years.   
 
 ### 3. What data-driven questions do you hope to answer about this domain (share at least 3)?
 Which countries stream the top songs on the charts the most? <br/>

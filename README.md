@@ -4,10 +4,10 @@ Use this `REAMDE.md` file to describe your final project (as detailed on Canvas)
 ### 1. Why are you interested in this field/domain?
 Audio is key to pop culture, and is becoming a bigger influencer everyday,
 spreading important messages, such as in podcasts and in songs such as
-"This is America". 
+"This is America".
 
 Almost everyone listens to music at some point in their day, often as for leisure to relieve stress or to relax or whatnot,
-and it can be insightful to see the trends and interactions of how different locations/cultures/regions share 
+and it can be insightful to see the trends and interactions of how different locations/cultures/regions share
 similar musical tastes, or how people connect their music choices to
 other general aspects of everyday life, like mood, time, season, weather, activities, etc.  
 
@@ -68,5 +68,8 @@ Can be used to identify trends in song moods and correlation to time of day / ye
 
 Top Spotify Tracks of 2018: Audio features of top Spotify songs  
 https://www.kaggle.com/nadintamer/top-spotify-tracks-of-2018?fbclid=IwAR0_Qmkt_lFc7huHMdBhVDT_F4BxkFhjJ4qy377TL0fxL8Nrq4-sgeXXurY  
-Used to answer the question what do all top songs have in common in a given year? Contains 100 rows (songs) with 16 columns, similar to the above dataset. Published by Spotify, and hosted on Kaggle by Nadin Tamer. 
+Used to answer the question what do all top songs have in common in a given year? Contains 100 rows (songs) with 16 columns, similar to the above dataset. Published by Spotify, and hosted on Kaggle by Nadin Tamer.
 
+Music Label Dataset: Popularity of a song in correlation with the duration of the song
+https://www.kaggle.com/thaisneubauer/million-song-dataset-studies
+This data is the result of cleaning up data from the MSD subset. Contains 6 columns and  10000 rows. Can identify the duration, key, song hottness, tempo and time signature of songs. Uses the Million Song dataset.

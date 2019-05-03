@@ -64,5 +64,9 @@ https://www.kaggle.com/geomack/spotifyclassification/version/1 <br/>
 Data collected by Spotify, also available via API, and hosted by user geomack on kaggle. Contains x2017 songs (rows), with 17 columns, representing song name, artist, and various song attributes, including danceability, energy, acousticness, valence, liveliness, etc. as determined by Spotify.  
 Further information on how these attributes were determined can be found here:  
 https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/  
-Can be used to identify trends in song moods and correlation to time of day / year / season.
+Can be used to identify trends in song moods and correlation to time of day / year / season.  
+
+Top Spotify Tracks of 2018: Audio features of top Spotify songs  
+https://www.kaggle.com/nadintamer/top-spotify-tracks-of-2018?fbclid=IwAR0_Qmkt_lFc7huHMdBhVDT_F4BxkFhjJ4qy377TL0fxL8Nrq4-sgeXXurY  
+Used to answer the question what do all top songs have in common in a given year? Contains 100 rows (songs) with 16 columns, similar to the above dataset. Published by Spotify, and hosted on Kaggle by Nadin Tamer. 
 

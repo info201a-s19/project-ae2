@@ -6,8 +6,24 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+library("dplyr")
+library("knitr")
 knitr::opts_chunk$set(echo = TRUE)
-source("scripts/artist_pop_chart.R")
+#setwd("scripts")
+#source("scripts/artist_pop_chart.R")
+source("scripts/summary-info.R")
+source("scripts/violin_plot.R")
+#for violin plot
+spotify_data_2017_2018 <- read.csv("data/2018_2017_combined.csv", stringsAsFactors = F)
+violin_plot_data_2017 <- spotify_data_2017_2018 %>%
+                               filter( genre == "Pop" & year == "2017")
+violin_plot_data_2018 <- spotify_data_2017_2018 %>%
+                               filter( genre == "Hip-Hop/Rap" & year == "2018")
+#for summary function
+spotify_data_2017 <- spotify_data_2017_2018 %>%
+                               filter(year == "2017")
+spotify_data_2018 <-spotify_data_2017_2018 %>%
+                               filter(year == "2018")
 ```
 
 ## Introduction
@@ -22,11 +38,25 @@ speechiness -- measure of presence of spoken words in track, from 0 to 1
 accousticness -- a confidence measure of whether a track is acoustic, from 0 to 1.
 instrumental -- measure of vocals, closer to 1, means less vocal content
 liveness -- detects the presence of an audience in the recording. Higher liveness values represent an increased probability of a live recording. a value above 0.8 provides strong likelihood that the track is live.
+tempo -- measure of beats per minute(BPM), speed or pace of song 
+```{r summary-info, echo = F}
+summary_2017 <- get_summary_info(spotify_data_2017)
+summary_2018 <- get_summary_info(spotify_data_2018)
+```
+## Summary Information
 
-##Summary Information
-##Table 
-#Top Artists Chart
+In 2017, `r summary_2017$popular_genre$genre` was/were the most popular genre(s), and `r summary_2017$popular_artist$artists` was/were the most popular artist(s). The most danceable song(s) was/were `r summary_2017$most_danceable$name`. The average danceability of the top 100 songs in 2017 was `r summary_2017$audio_features$danceability`. The average danceability of the most popular genre of the top 100 songs of 2017 was `r summary_2017$genre[summary_2017$genre == "Pop",'danceability']`.   In 2018, `r summary_2018$popular_genre$genre` was/were the most popular genre(s), and `r summary_2018$popular_artist$artists` was/were the most popular artist(s). The most danceable song(s) was/were `r summary_2018$most_danceable$name`. The average danceability of the top 100 songs in 2018 was `r summary_2018$audio_features$danceability`. The average danceability of the most popular genre of the top 100 songs of 2018 was `r summary_2018$genre[summary_2018$genre == "Hip-Hop/Rap",'danceability']`.
+
+## Table 
+## Top Artists Chart
 This chart highlights the top artists of both 2017 and 2018. Combining the two years together we get insight into which artists are consistently topping the charts every year, popular newcomers, and potential one hit wonders. Seeing the popular artists over these years allows for further analysis to break apart their songs and figure out what combination of music features made their songs most successful in these years. It also allows viewers to see if a particular artist had more popular songs in a given year and provide the question to look further into the difference between their songs from each year to explain the difference. 
 ## Influence of Danceability on Loudness
-## What is the distribution for speechiness(measure of spoken words) in the most popular genre(pop)?
-tempo -- measure of beats per minute(BPM), speed or pace of song 
+
+## What is the distribution for speechiness(measure of spoken words) in the most popular genre for both 2017 and 2018?
+The two following charts show a distribution of speechiness for the most popular genre for 2017 and 2018.It can be seen that for both years speechiness does not go above 0.6, indicating that neither genre contains all spoken words for the top 100 songs for both years. In addition it can be seen that for the most popular genre for 2017, Pop, the frequency of low speechiness is much higher than for the speechiness for the most popular genre for 2018, Hip-Hop/Rap, indicating that Pop does not have much spoken words and has much more music. For Pop, majority of the data is centered below a speechiness of 0.2, indicating pop is mostly music compared to words. The plot for Hip-Hop Rap is much more dense from speechiness 0.1 to 0.3 compared to the plot for Pop indicating that Hip-Hop/Rap contains more words than Pop. 
+
+```{r violin_plot, fig.width = 5, fig.height = 4, echo = F}
+chart(violin_plot_data_2017)
+chart(violin_plot_data_2018)
+```
+

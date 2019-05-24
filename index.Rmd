@@ -1,0 +1,32 @@
+---
+title: "Midpoint Project"
+author: "Meli Akdeniz"
+date: "5/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("scripts/artist_pop_chart.R")
+```
+
+## Introduction
+Music is at the root of of the lives of the majority of people. Mostly as a point of leisure and a means of escape from the stress of the real world. Breaking down todays popular songs gives insight into the musical components that make up these songs of escape for the listerns of Spotify. This projects develves into what makes a song popular and what features are the features of a popular song. Music listened is a form of self-expression and looking into popular in specific offers a lot of insight into a culture. Analyzing data sets found for the top 100 songs on Spotify from 2017 and 2018 each song is broken into several different musical components. These include: danceability -- how danceable a song is based on combination of musical elements such as tempo, rhythym stability, beat strength, and regularity 0 is least danceable, and 1 is most danceable.
+energy -- measure of intensity and activity, 1 is fast, loud and noisy
+key -- the estimated key of the track, if no key detected the value is -1
+loudness -- how loud a track is in decibels, range from -60 to 0 db
+mode -- indicate the type of scale from which the melodic content derived, major is 1 
+and minor is 0
+speechiness -- measure of presence of spoken words in track, from 0 to 1
+0.66 and above is all spoken words, 0.33-0.66 is music and speech, and below 0.33 is music
+accousticness -- a confidence measure of whether a track is acoustic, from 0 to 1.
+instrumental -- measure of vocals, closer to 1, means less vocal content
+liveness -- detects the presence of an audience in the recording. Higher liveness values represent an increased probability of a live recording. a value above 0.8 provides strong likelihood that the track is live.
+
+##Summary Information
+##Table 
+#Top Artists Chart
+This chart highlights the top artists of both 2017 and 2018. Combining the two years together we get insight into which artists are consistently topping the charts every year, popular newcomers, and potential one hit wonders. Seeing the popular artists over these years allows for further analysis to break apart their songs and figure out what combination of music features made their songs most successful in these years. It also allows viewers to see if a particular artist had more popular songs in a given year and provide the question to look further into the difference between their songs from each year to explain the difference. 
+## Influence of Danceability on Loudness
+## What is the distribution for speechiness(measure of spoken words) in the most popular genre(pop)?
+tempo -- measure of beats per minute(BPM), speed or pace of song 

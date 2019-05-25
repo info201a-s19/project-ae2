@@ -4,7 +4,6 @@ author: "Meli Akdeniz, Alice Zhu, Anuradha Seshan, Albert Wang"
 date: "5/24/2019"
 output: html_document
 ---
-
 ```{r setup, include=FALSE}
 library("knitr")
 
@@ -106,7 +105,7 @@ artist_plot_funct(join_years)
 ## Influence of Loudness on Danceability
 This chart showcases how loudness influences dancability in the years 2017 and 2018. Since the point of this chart is to indicate the impact of loudness on danceability, we chose to showcase our data with a scatterplot, as a scatterplot is more optimal for comparison. Danceability describes how suitable a track is for dancing. The general trend indicates that most songs are optimally danceable at 0.77 decibles and -.45 danceability. There is a large concentration of points gathered around that spot. The data also indicates that very low levels of loudness have worse, more negative danceability.
 ```{r scatterplot, echo = F, warning=FALSE}
-comparison_scatterplot("danceability", "loudness", top2018_2017)
+comparison_scatterplot("danceability", "loudness", spotify_data_2017_2018)
 ```
 
 ### What is the distribution for speechiness(measure of spoken words) in the most popular genre for both 2017 and 2018?

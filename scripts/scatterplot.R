@@ -3,7 +3,7 @@ library("dplyr")
 library("Hmisc")
 
 #top2018_2017 <- read.csv("data/2018_2017_combined.csv", 
- #        stringsAsFactors = FALSE)
+  #       stringsAsFactors = FALSE)
 
 # I really struggled to implement color into the ggplot, even manually setting the fill to 
 # blue didn't change the color of the plot at all
@@ -20,4 +20,4 @@ comparison_scatterplot <- function(element1, element2, dataframe) {
   create_scatterplot
 }
 
-#comparison_scatterplot("danceability", "loudness", top2018_2017, genre)
+#comparison_scatterplot("danceability", "loudness", top2018_2017)

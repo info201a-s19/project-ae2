@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 source("scripts/artist_pop_chart.R")
 source("scripts/summary-info.R")
 source("scripts/violin_plot.R")
+source("scripts/scatterplot.R")
+
 #for violin plot
 spotify_data_2017_2018 <- read.csv("data/2018_2017_combined.csv", stringsAsFactors = F)
 violin_plot_data_2017 <- spotify_data_2017_2018 %>%
@@ -74,13 +76,17 @@ In 2017, `r summary_2017$popular_genre$genre` was/were the most popular genre(s)
 
 ## Table 
 ## Top Artists Chart
-This chart highlights the relationship between year and artist popularity, specifically focussing on the change in popular media over the course of of one year, looking at 2017 and 2018's top artists. Combining the two years together we get insight into which artists are consistently topping the charts every year, popular newcomers, and potential one hit wonders. Seeing the popular artists over these years allows for further analysis to break apart their songs and figure out what combination of music features made their songs most successful in these years. It also allows viewers to see if a particular artist had more popular songs in a given year and provide the question to look further into the difference between their songs from each year to explain the difference. 
+This chart highlights the relationship between year and artist popularity, specifically focusing on the change in popular media over the course of of one year, looking at 2017 and 2018's top artists. Combining the two years together we get insight into which artists are consistently topping the charts every year, popular newcomers, and potential one hit wonders. Seeing the popular artists over these years allows for further analysis to break apart their songs and figure out what combination of music features made their songs most successful in these years. It also allows viewers to see if a particular artist had more popular songs in a given year and provide the question to look further into the difference between their songs from each year to explain the difference. 
 ```{r artist_pop_chart, echo = F, warning=FALSE}
 artist_plot_funct(join_years)
 ```
 
 
-## Influence of Danceability on Loudness
+## Influence of Loudness on Danceability
+This chart showcases how loudness influences dancability in the years 2017 and 2018. Since the point of this chart is to indicate the impact of loudness on danceability, we chose to showcase our data with a scatterplot, as a scatterplot is more optimal for comparison. Danceability describes how suitable a track is for dancing. The general trend indicates that most songs are optimally danceable at 0.77 decibles and -.45 danceability. There is a large concentration of points gathered around that spot. The data also indicates that very low levels of loudness have worse, more negative danceability.
+```{r scatterplot, echo = F, warning=FALSE}
+comparison_scatterplot("danceability", "loudness", top2018_2017)
+```
 
 ## What is the distribution for speechiness(measure of spoken words) in the most popular genre for both 2017 and 2018?
 The two following charts show a distribution of speechiness for the most popular genre for 2017 and 2018.It can be seen that for both years speechiness does not go above 0.6, indicating that neither genre contains all spoken words for the top 100 songs for both years. In addition it can be seen that for the most popular genre for 2017, Pop, the frequency of low speechiness is much higher than for the speechiness for the most popular genre for 2018, Hip-Hop/Rap, indicating that Pop does not have much spoken words and has much more music. For Pop, majority of the data is centered below a speechiness of 0.2, indicating pop is mostly music compared to words. The plot for Hip-Hop Rap is much more dense from speechiness 0.1 to 0.3 compared to the plot for Pop indicating that Hip-Hop/Rap contains more words than Pop. 

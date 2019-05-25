@@ -4,9 +4,10 @@
 library("ggplot2") 
 library("dplyr")
 chart <- function(dataset) {
-  ggplot(dataset, aes(x= genre, y= speechiness)) + 
+  dataset <- as.data.frame(dataset)
+  ggplot(dataset, aes(x= genre, y= speechiness)) +
   geom_violin() +
-  labs( title = "Speechiness vs Most Popular Genre in 2017 and 2018",
+  labs( title = "Speechiness vs Most Popular Genre",
         x= "Genre",
         y = "Speechiness"
   )

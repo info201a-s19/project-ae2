@@ -13,11 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 source("scripts/artist_pop_chart.R")
 source("scripts/summary-info.R")
 source("scripts/violin_plot.R")
-<<<<<<< HEAD
 source("scripts/scatterplot.R")
-=======
 source("scripts/aggregate_table.R")
->>>>>>> albert
+
 
 #for violin plot
 spotify_data_2017_2018 <- read.csv("data/2018_2017_combined.csv", 

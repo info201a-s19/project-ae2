@@ -55,13 +55,44 @@ violin_page <- tabPanel(
     mainPanel(
       plotOutput(outputId = "violin_plot", width = "100%", height = "700px"),
       plotOutput(outputId = "violin_plot_2", width = "100%", height = "700px")
+    )))
+
+  artist_page <-  tabPanel(
+      "Top 10 Artists Details",
+      titlePanel("Average Features of the Top 10 Artists"),
+      sidebarLayout(
+        sidebarPanel(
+          radioButtons("feature",
+                       label = ("Choose a feature"),
+                       choices = c(
+                         "Danceability" = "danceability",
+                         "Energy" = "energy",
+                         "Key" = "key",
+                         "Loudness" = "loudness",
+                         "Speechiness" = "speechiness",
+                         "Acousticness" = "acousticness",
+                         "Instrumentalness" = "instrumentalness",
+                         "Liveness" = "liveness",
+                         "Valence" = "valence",
+                         "Tempo" = "tempo",
+                         "Duration" = "duration_ms"
+                       )
+          )
+        ),
+        mainPanel(
+          plotOutput("histogram")
+        )
+      )
     )
-  )
-)
+
+
+
 
 
 # Define UI for application
 ui <- navbarPage(
   "Spotify Statistics",
+  artist_page,
   violin_page
 )
+

@@ -1,6 +1,5 @@
 library("shiny")
 library("ggplot2")
-<<<<<<< HEAD
 library(stringr)
 library(dplyr)
 # for violin plot
@@ -59,13 +58,6 @@ violin_page <- tabPanel(
     )))
 
   artist_page <-  tabPanel(
-=======
-
-my_ui <- fluidPage(
-  navbarPage(
-    "Spotify Data",
-    tabPanel(
->>>>>>> f604ebd08eccfce3ab02f384a153bad04134ab13
       "Top 10 Artists Details",
       titlePanel("Average Features of the Top 10 Artists"),
       sidebarLayout(
@@ -92,19 +84,10 @@ my_ui <- fluidPage(
         )
       )
     )
-<<<<<<< HEAD
-
-
-
-
 
 # Define UI for application
 ui <- navbarPage(
   "Spotify Statistics",
   artist_page,
   violin_page
-=======
-  )
->>>>>>> f604ebd08eccfce3ab02f384a153bad04134ab13
 )
-

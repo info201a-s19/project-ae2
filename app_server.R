@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 library("dplyr")
 library("Hmisc")

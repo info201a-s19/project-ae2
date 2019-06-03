@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 
 library("dplyr")
 library("Hmisc")
 library("ggplot2")
 library(stringr)
+=======
+library("dplyr")
+library("Hmisc")
+library("ggplot2")
+>>>>>>> f604ebd08eccfce3ab02f384a153bad04134ab13
 
 create_histogram <- function(dataframe, feature, artists) {
   artists_list <- dataframe %>%
@@ -28,6 +34,7 @@ create_histogram <- function(dataframe, feature, artists) {
 
 my_server <- function(input, output) {
   top_artists <- read.csv("data/2018_2017_combined.csv", 
+<<<<<<< HEAD
                           stringsAsFactors = F)
   output$histogram <- renderPlot(
     create_histogram(top_artists, input$feature, top_artists$artists)
@@ -97,3 +104,11 @@ my_server <- function(input, output) {
 
 
 
+=======
+                                   stringsAsFactors = F)
+  output$histogram <- renderPlot(
+    create_histogram(top_artists, input$feature, top_artists$artists)
+  )
+}
+
+>>>>>>> f604ebd08eccfce3ab02f384a153bad04134ab13

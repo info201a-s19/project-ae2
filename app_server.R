@@ -24,10 +24,14 @@ create_histogram <- function(dataframe, feature, artists) {
          fill = "Artist Names") +
     xlab("Top Artists") +
     ylab(capitalize(feature)) +
-    geom_col(aes(fill = songs_features$artists)) +
+    geom_col(aes(fill = songs_features$artists, 
+                 text = paste0(
+                   "Artist: ", songs_features$artists,
+                   "\nMean: ", round(songs_features$feature_mean, digits = 2)
+                 ))) +
     theme(plot.title = element_text(face="bold",
                                     size = 16),
-          axis.text.x = element_text(angle = 45, hjust = 1)))
+          axis.text.x = element_text(angle = 45, hjust = 1)), tooltip = "text")
 }
 
 server <- function(input, output) {

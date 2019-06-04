@@ -147,12 +147,14 @@ header_font <- paste0("https://fonts.googleapis.com/css?family=",
 overview <- tabPanel(
   "Overview",
   fluidPage(
+    # CSS style for header font
     tags$head(
       tags$style(HTML(
         paste0("@import url('", header_font, "');")
         )
       )
     ),
+    # Img from hyperlink
     img(src = img_link,
         width = "75%",
         height = "25%"),
@@ -200,12 +202,14 @@ overview <- tabPanel(
 conclusion <- tabPanel(
   "Takeaways",
   fluidPage(
+    # CSS font
     tags$head(
       tags$style(HTML(
         paste0("@import url('", header_font, "');")
         )
       )
     ),
+    # CSS font apply
     h1("Dancing to the Top",
        style = "font-family: 'Open Sans Condensed', sans-serif;
        font-weight: 1000; line-height: 1.1; 
@@ -247,7 +251,7 @@ conclusion <- tabPanel(
       em("Say You Won't Let Go"),
       ". While the success of a song may not be able to be defined purely
       numerically and quanitatively, looking at broader, less rigidly-defined
-      terms and categories may yield further insight.")
+      terms and categories may yield further insight."),
     tableOutput("importance_table"),
     
     h1("What Does Pop Even Stand For?",
@@ -268,9 +272,12 @@ conclusion <- tabPanel(
       Based on this imbalance, we might conclude that for success, a track or 
       song should have not only high danceability and energy, but should also
       fall within one of these genres. For example, a country song that hits
-      all other qualifications may not be able to achieve the same success as
+      all other qualifications may be less likely to achieve the same success as
       a rap or pop song simply because of the lesser favorable view that pop
-      culture views country music with.")
+      culture views country music with."),
+    p("This leads us closer to being able to define what makes a successful
+      song -- however, it still doesn't explain the songs that yet still don't
+      fit this categorization. ")
   )
 )
   

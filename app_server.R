@@ -114,6 +114,7 @@ server <- function(input, output) {
     
     demo_plot
   })
+  # Table for avg feature values
   output$importance_table <- renderTable({
     data <- read.csv("data/2018_2017_combined.csv",
                         stringsAsFactors = F)
@@ -130,6 +131,7 @@ server <- function(input, output) {
         )
     return(importance)
   })
+  # Plotting number of instances for past 2 years by genre
   output$genre_count <- renderPlot({
     genre_count <- spotify_data_2017_2018 %>% count(genre) %>% arrange(-n)
     names(genre_count) <- c("Genre", "Instances")

@@ -205,15 +205,18 @@ conclusion <- tabPanel(
     # CSS font
     tags$head(
       tags$style(HTML(
-        paste0("@import url('", header_font, "');")
+        paste0("@import url('", header_font, "');",
+               "h1 {font-family: 'Open Sans Condensed', sans-serif;
+               font-weight: 1000; line-height: 1.1; 
+               color: #4d3a7d;}
+               p {font-family: 'Tahoma';
+               font-weight: 250; line-height: 1.1; 
+               color: #4d3a7d;")
         )
       )
     ),
     # CSS font apply
-    h1("Dancing to the Top",
-       style = "font-family: 'Open Sans Condensed', sans-serif;
-       font-weight: 1000; line-height: 1.1; 
-       color: #4d3a7d;"),
+    h1(strong("Dancing to the Top")),
     p("Looking at Spotify's key audio features for the top 100 songs of 2017
       and 2018, there are two key categories that stand out: Danceability and
       Energy."),
@@ -267,7 +270,7 @@ conclusion <- tabPanel(
       These four genres account for over 80% of the top charts, and,
       unsurprisingly, these genres include songs with high energy, high
       danceability, and low instrumentalness. (To further explore distributions
-      of audio features within genres, see the violin plots on page 3."),
+      of audio features within genres, see the box plots on page 3."),
     p("This indicates a current imbalance within the world of music pop culture.
       Based on this imbalance, we might conclude that for success, a track or 
       song should have not only high danceability and energy, but should also

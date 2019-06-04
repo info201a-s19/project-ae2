@@ -114,4 +114,35 @@ server <- function(input, output) {
     
     demo_plot
   })
+  output$importance_table <- renderTable({
+    data <- read.csv("data/2018_2017_combined.csv",
+                        stringsAsFactors = F)
+    importance <- data %>% dplyr::summarize(
+          "Danceability" = round((mean(danceability) / 1),2),
+          "Energy" = round((mean(energy) / 1),2),
+          "Loudness" = round((mean(loudness) / -60),2),
+          "Acousticness" = round((mean(acousticness) / 1),2),
+          "Speechiness" = round((mean(speechiness) / 1),2),
+          "Instrumentalness" = round((mean(instrumentalness) / 1),2),
+          "Liveness" = round((mean(liveness) / 1),2),
+          "Valence" = round((mean(valence) / 1),2),
+          "Tempo" = round(mean(tempo),2)
+        )
+    return(importance)
+  })
+  output$genre_count <- renderPlot({
+    genre_count <- spotify_data_2017_2018 %>% count(genre) %>% arrange(-n)
+    names(genre_count) <- c("Genre", "Instances")
+    
+    ggplot(data = genre_count) +
+      geom_col(
+        mapping = aes(x = Genre, y = Instances),
+        fill = "cornflowerblue"
+      ) +
+      geom_text(
+        aes(x = Genre, y = Instances, label = Instances, vjust = -1)
+      )
+  })
 }
+
+

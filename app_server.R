@@ -1,9 +1,9 @@
-
-
 library("dplyr")
 library("Hmisc")
 library("ggplot2")
 library(stringr)
+library(shiny)
+library(plotly)
 
 create_histogram <- function(dataframe, feature, artists) {
   artists_list <- dataframe %>%
@@ -18,20 +18,23 @@ create_histogram <- function(dataframe, feature, artists) {
     group_by(artists) %>%
     summarize_(feature_mean = paste0("mean(", feature, ", na.rm = TRUE)"))
 
-  ggplot(songs_features, mapping = aes(x = songs_features$artists, y = songs_features$feature_mean)) +
-    labs(title = "Features of the Artists with the Most Songs on the Charts", fill = "Artist Names") +
+  ggplot(songs_features, mapping = aes(x = songs_features$artists, 
+                                       y = songs_features$feature_mean)) +
+    labs(title = "Features of the Artists with the Most Songs on the Charts", 
+         fill = "Artist Names") +
     xlab("Top Artists") +
     ylab(capitalize(feature)) +
     geom_col(aes(fill = songs_features$artists)) +
     theme(plot.title = element_text(face="bold",
-                                    size = 16))
+                                    size = 16),
+          axis.text.x = element_text(angle = 45, hjust = 1))
 }
 
-my_server <- function(input, output) {
+server <- function(input, output) {
   top_artists <- read.csv("data/2018_2017_combined.csv",
                           stringsAsFactors = F)
   output$histogram <- renderPlot(
-    create_histogram(top_artists, input$feature, top_artists$artists)
+    create_histogram(top_artists, input$features, top_artists$artists)
   )
   # What is the distribution for an audio feature
   # for a particular genre(e.g.pop)? How does it compare to another genre?
@@ -93,5 +96,22 @@ my_server <- function(input, output) {
           aspect.ratio = 1
         )
     }
+  })
+  #Scatterplot of Song Features
+  output$featuredemo <- renderPlotly({
+    title <- paste0("Song ", input$x_var, 
+                    " v.s. ", "Song ", input$y_var)
+    
+    demo_plot <- ggplotly(ggplot(feature_names) +
+                            geom_point(mapping = aes_string(x = input$x_var, 
+                                                            y = input$y_var, 
+                                                            color = "Genre", 
+                                                            group = "Artists"), 
+                                       size = input$size) +
+                        labs(x = input$x_var, y = input$y_var, title = title) +
+                            theme(plot.title = element_text(hjust = 0.5))
+    )
+    
+    demo_plot
   })
 }

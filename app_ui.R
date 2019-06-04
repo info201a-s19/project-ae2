@@ -2,7 +2,9 @@ library("shiny")
 library("ggplot2")
 library(stringr)
 library(dplyr)
+library(plotly)
 # for violin plot
+
 spotify_data_2017_2018 <- read.csv("data/2018_2017_combined.csv",
   stringsAsFactors = F
 )
@@ -16,6 +18,20 @@ spotify_data_for_plot <- spotify_data_2017_2018 %>%
   filter(genre != "Rock" & genre != "Synth-pop" &
     genre != "Future-bass" & genre != "Tropical House"
   & genre != "Rap")
+
+#For Feature Plot
+feature_names <- spotify_data_2017_2018 %>%
+  select(
+    name, artists, danceability, energy, loudness, 
+    speechiness, acousticness, instrumentalness, liveness, valence,
+    tempo, genre) %>%
+  `colnames<-`(c(
+    "Name", "Artists", "Danceability", "Energy", "Loudness", "Speechiness", 
+    "Acousticness", "Instrumentalness",
+    "Liveness", "Valence", "Tempo", "Genre"
+  ))
+select_values <- colnames(feature_names[3:11])
+
 
 violin_page <- tabPanel(
   "Genres and Audio Features",
@@ -62,7 +78,7 @@ violin_page <- tabPanel(
       titlePanel("Average Features of the Top 10 Artists"),
       sidebarLayout(
         sidebarPanel(
-          radioButtons("feature",
+          radioButtons("features",
                        label = ("Choose a feature"),
                        choices = c(
                          "Danceability" = "danceability",
@@ -84,10 +100,45 @@ violin_page <- tabPanel(
         )
       )
     )
-
+#Feature Analysis Panel
+  x_input <- selectInput(
+    "x_var",
+    label = "X Variable",
+    choices = select_values,
+    selected = "Danceability"
+  )
+  
+  y_input <- selectInput(
+    "y_var",
+    label = "Y Variable",
+    choices = select_values,
+    selected = "Loudness"
+  )
+  
+  size_input <- sliderInput(
+    "size",
+    label = "Size of point", min = 1, max = 10, value = 2
+  )
+  feature_sidebar_content <- sidebarPanel(
+    x_input,
+    y_input,
+    size_input
+  )
+  feature_main_content <- mainPanel(
+    plotlyOutput("featuredemo")
+  )
+  feature_panel <- tabPanel(
+    "Song Feature Analysis",
+    titlePanel("Song Feature Comparison of Top 100 Songs from 2017 and 2018"),
+    sidebarLayout(
+      feature_sidebar_content,
+      feature_main_content
+    )
+  )
 # Define UI for application
 ui <- navbarPage(
   "Spotify Statistics",
   artist_page,
-  violin_page
+  violin_page,
+  feature_panel
 )

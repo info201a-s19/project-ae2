@@ -84,7 +84,6 @@ artist_page <-  tabPanel(
                    choices = c(
                      "Danceability" = "danceability",
                      "Energy" = "energy",
-                     "Key" = "key",
                      "Loudness" = "loudness",
                      "Speechiness" = "speechiness",
                      "Acousticness" = "acousticness",
@@ -110,8 +109,6 @@ artist_page <-  tabPanel(
         A value of 0.0 is least danceable and 1.0 is most danceable.",
         br(), strong("Energy: "), "Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. 
         Typically, energetic tracks feel fast, loud, and noisy",
-        br(), strong("Key: "), "The estimated overall key of the track. Integers map to pitches using standard Pitch Class notation.
-        If no key was detected, the value is -1.",
         br(), strong("Loudness: "), "The overall loudness of a track in decibels (dB).
         Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks",
         br(), strong("Speechiness: "), "Speechiness detects the presence of spoken words in a track. 

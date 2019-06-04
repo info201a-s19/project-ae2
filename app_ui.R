@@ -97,7 +97,7 @@ artist_page <-  tabPanel(
       )
     ),
     mainPanel(
-      plotOutput("histogram")
+      plotlyOutput("histogram")
     )
   )
 )

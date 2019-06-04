@@ -18,22 +18,26 @@ create_histogram <- function(dataframe, feature, artists) {
     group_by(artists) %>%
     summarize_(feature_mean = paste0("mean(", feature, ", na.rm = TRUE)"))
 
-  ggplot(songs_features, mapping = aes(x = songs_features$artists, 
+  ggplotly(ggplot(songs_features, mapping = aes(x = songs_features$artists, 
                                        y = songs_features$feature_mean)) +
     labs(title = "Features of the Artists with the Most Songs on the Charts", 
          fill = "Artist Names") +
     xlab("Top Artists") +
     ylab(capitalize(feature)) +
-    geom_col(aes(fill = songs_features$artists)) +
+    geom_col(aes(fill = songs_features$artists, 
+                 text = paste0(
+                   "Artist: ", songs_features$artists,
+                   "\nMean: ", round(songs_features$feature_mean, digits = 2)
+                 ))) +
     theme(plot.title = element_text(face="bold",
                                     size = 16),
-          axis.text.x = element_text(angle = 45, hjust = 1))
+          axis.text.x = element_text(angle = 45, hjust = 1)), tooltip = "text")
 }
 
 server <- function(input, output) {
   top_artists <- read.csv("data/2018_2017_combined.csv",
                           stringsAsFactors = F)
-  output$histogram <- renderPlot(
+  output$histogram <- renderPlotly(
     create_histogram(top_artists, input$features, top_artists$artists)
   )
   # What is the distribution for an audio feature

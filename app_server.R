@@ -73,13 +73,15 @@ server <- function(input, output) {
 
   # BoxPlot for Genre(s) and Particular Feature
   output$box_plot <- renderPlotly({
-    # If statement for whether user wants to compare data with another genre, and altering
-    # plot if they want to
+    # If statement for whether user wants to compare data with another genre,
+    # and altering  plot if they want to
     if (input$add_genre == T) {
-      dataset <- violin_plot_data_both() 
+      dataset <- violin_plot_data_both()
       second_genre <- paste("and ", input$second_genre)
       obs <- nrow(violin_plot_data_second_genre())
-      obs_second_genre <- paste("and", obs, "for", input$second_genre, sep = " ")
+      obs_second_genre <- paste("and", obs, "for", input$second_genre,
+        sep = " "
+      )
     } else {
       dataset <- violin_plot_data()
       second_genre <- ""
@@ -92,19 +94,24 @@ server <- function(input, output) {
       limits <- c(min, max)
     }
     ggplotly(ggplot(dataset, aes(x = genre)) +
-      geom_boxplot(aes_string(y = eval(input$feature)), fill = "orange",
-                  outlier.size =3, outlier.colour = "purple") +
-        stat_summary(mapping =aes_string(y=eval(input$feature)), 
-                     fun.y = mean, geom = "point", colour = "darkblue",na.rm =T) +
+      geom_boxplot(aes_string(y = eval(input$feature)),
+        fill = "orange",
+        outlier.size = 3, outlier.colour = "purple"
+      ) +
+      stat_summary(
+        mapping = aes_string(y = eval(input$feature)),
+        fun.y = mean, geom = "point", colour = "darkblue",
+        na.rm = T
+      ) +
       labs(
         title =
           paste(str_to_title(input$feature), "for", input$genre,
-             second_genre,
+            second_genre,
             sep = " "
           ),
         x = "Genre",
         y = str_to_title(input$feature)
-      ) +
+        ) +
       scale_y_continuous(limits = y_limits(input$feature, dataset)) +
       # Assign characteristics to titles in plot
       theme(
@@ -143,14 +150,14 @@ server <- function(input, output) {
       stringsAsFactors = F
     )
     importance <- data %>% dplyr::summarize(
-      "Danceability" = round((mean(danceability) / 1), 2),
-      "Energy" = round((mean(energy) / 1), 2),
-      "Loudness" = round((mean(loudness) / -60), 2),
-      "Acousticness" = round((mean(acousticness) / 1), 2),
-      "Speechiness" = round((mean(speechiness) / 1), 2),
-      "Instrumentalness" = round((mean(instrumentalness) / 1), 2),
-      "Liveness" = round((mean(liveness) / 1), 2),
-      "Valence" = round((mean(valence) / 1), 2),
+      "Danceability" = round( (mean(danceability) / 1), 2),
+      "Energy" = round( (mean(energy) / 1), 2),
+      "Loudness" = round( (mean(loudness) / -60), 2),
+      "Acousticness" = round( (mean(acousticness) / 1), 2),
+      "Speechiness" = round( (mean(speechiness) / 1), 2),
+      "Instrumentalness" = round( (mean(instrumentalness) / 1), 2),
+      "Liveness" = round( (mean(liveness) / 1), 2),
+      "Valence" = round( (mean(valence) / 1), 2),
       "Tempo" = round(mean(tempo), 2)
     )
     return(importance)
@@ -173,40 +180,40 @@ server <- function(input, output) {
   })
   output$dancehappy <- renderPlotly({
     title <- "Song Danceability v.s. Valence"
-    
     demo_plot <- ggplotly(ggplot(feature_names) +
-                            geom_point(
-                              mapping = aes_string(
-                                x = spotify_data_2017_2018$danceability,
-                                y = spotify_data_2017_2018$valence,
-                                color = "Genre",
-                                group = "Artists"
-                              )
-                            ) +
-                            labs(x = "Danceability",
-                                 y = "Valence",
-                                 title = title) +
-                            theme(plot.title = element_text(hjust = 0.5)))
-    
+      geom_point(
+        mapping = aes_string(
+          x = spotify_data_2017_2018$danceability,
+          y = spotify_data_2017_2018$valence,
+          color = "Genre",
+          group = "Artists"
+        )
+      ) +
+      labs(
+        x = "Danceability",
+        y = "Valence",
+        title = title
+      ) +
+      theme(plot.title = element_text(hjust = 0.5)))
     demo_plot
   })
   output$energyloud <- renderPlotly({
     title <- "Song Energy v.s. Loudness"
-    
     demo_plot <- ggplotly(ggplot(feature_names) +
-                            geom_point(
-                              mapping = aes_string(
-                                x = spotify_data_2017_2018$energy,
-                                y = spotify_data_2017_2018$loudness,
-                                color = "Genre",
-                                group = "Artists"
-                              )
-                            ) +
-                            labs(x = "Energy",
-                                 y = "Loudness",
-                                 title = title) +
-                            theme(plot.title = element_text(hjust = 0.5)))
-    
+      geom_point(
+        mapping = aes_string(
+          x = spotify_data_2017_2018$energy,
+          y = spotify_data_2017_2018$loudness,
+          color = "Genre",
+          group = "Artists"
+        )
+      ) +
+      labs(
+        x = "Energy",
+        y = "Loudness",
+        title = title
+      ) +
+      theme(plot.title = element_text(hjust = 0.5)))
     demo_plot
   })
 }

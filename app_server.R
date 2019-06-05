@@ -95,7 +95,7 @@ server <- function(input, output) {
       geom_boxplot(aes_string(y = eval(input$feature)), fill = "steelblue",
                   outlier.size =3, outlier.colour = "purple") +
         stat_summary(mapping =aes_string(y=eval(input$feature)), 
-                     fun.y = mean, geom = "point", colour = "red") +
+                     fun.y = mean, geom = "point", colour = "red",na.rm =T) +
       labs(
         title =
           paste(str_to_title(input$feature), "for", input$genre,

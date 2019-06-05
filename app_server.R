@@ -72,11 +72,11 @@ server <- function(input, output) {
   })
 
   # BoxPlot for Genre(s) and Particular Feature
-  output$box_plot <- renderPlot({
+  output$box_plot <- renderPlotly({
     # If statement for whether user wants to compare data with another genre, and altering
     # plot if they want to
     if (input$add_genre == T) {
-      dataset <- violin_plot_data_both()
+      dataset <- violin_plot_data_both() 
       second_genre <- paste("and ", input$second_genre)
       obs <- nrow(violin_plot_data_second_genre())
       obs_second_genre <- paste("and", obs, "for", input$second_genre, sep = " ")
@@ -91,12 +91,15 @@ server <- function(input, output) {
       max <- max(dataframe[feature], na.rm = T)
       limits <- c(min, max)
     }
-    ggplot(dataset, aes(x = genre)) +
-      geom_boxplot(aes_string(y = eval(input$feature)), fill = "steelblue") +
+    ggplotly(ggplot(dataset, aes(x = genre)) +
+      geom_boxplot(aes_string(y = eval(input$feature)), fill = "steelblue",
+                  outlier.size =3, outlier.colour = "purple") +
+        stat_summary(mapping =aes_string(y=eval(input$feature)),
+        fun.y=mean, geom="point", inherit.aes=T) +
       labs(
         title =
           paste(str_to_title(input$feature), "for", input$genre,
-             second_genre, "in 2017 and 2018",
+             second_genre,
             sep = " "
           ),
         subtitle = paste("# Observations:", nrow(violin_plot_data()),
@@ -110,14 +113,12 @@ server <- function(input, output) {
       scale_y_continuous(limits = y_limits(input$feature, dataset)) +
       # Assign characteristics to titles in plot
       theme(
-        plot.title = element_text(size = 24, face = "bold"),
-        plot.subtitle = element_text(size = 18),
-        axis.title = element_text(size = 14, face = "bold"),
-        axis.text = element_text(size = 14),
-        legend.text = element_text(size = 14),
-        legend.title = element_text(size = 14, face = "bold"),
+        plot.title = element_text(size = 18, face = "bold"),
+        plot.subtitle = element_text(size = 10),
+        axis.title = element_text(size = 10, face = "bold"),
+        axis.text = element_text(size = 10),
         aspect.ratio = 1
-      )
+      ), animate = F)
   })
 
   # Scatterplot of Song Features

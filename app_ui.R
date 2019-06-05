@@ -35,7 +35,7 @@ feature_names <- spotify_data_2017_2018 %>%
   ))
 select_values <- colnames(feature_names[3:11])
 
-#BoxPlotPage
+# BoxPlotPage
 genre_page <- tabPanel(
   "Genres and Audio Features",
   h1("Correlations with Genre and a Particular Audio Feature",
@@ -99,7 +99,8 @@ genre_page <- tabPanel(
           The top 25% of the dataset remains in the upper whisker,
          and the lowest 25% of the dataset remains
         in the lower whisker."),
-      plotOutput(outputId = "box_plot", width = "100%", height = "600px")
+      plotlyOutput(outputId = "box_plot", width = "65%",
+                    height = "600px", inline = F)
     )
   )
 )

@@ -98,7 +98,7 @@ genre_page <- tabPanel(
          of the dataset lie in the box.
           The top 25% of the dataset remains in the upper whisker,
          and the lowest 25% of the dataset remains
-        in the lower whisker. The red point
+        in the lower whisker. The blue point
         indicates the mean of that particular feature
         for the particular genre, with the value of the mean
         displayed next to the feature when the point

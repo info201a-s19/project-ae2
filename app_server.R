@@ -94,19 +94,14 @@ server <- function(input, output) {
     ggplotly(ggplot(dataset, aes(x = genre)) +
       geom_boxplot(aes_string(y = eval(input$feature)), fill = "steelblue",
                   outlier.size =3, outlier.colour = "purple") +
-        stat_summary(mapping =aes_string(y=eval(input$feature)),
-        fun.y=mean, geom="point", inherit.aes=T) +
+        stat_summary(mapping =aes_string(y=eval(input$feature)), 
+                     fun.y = mean, geom = "point", colour = "red") +
       labs(
         title =
           paste(str_to_title(input$feature), "for", input$genre,
              second_genre,
             sep = " "
           ),
-        subtitle = paste("# Observations:", nrow(violin_plot_data()),
-          "for", input$genre,
-          obs_second_genre,
-          sep = " "
-        ),
         x = "Genre",
         y = str_to_title(input$feature)
       ) +

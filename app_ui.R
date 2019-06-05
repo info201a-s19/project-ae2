@@ -98,7 +98,14 @@ genre_page <- tabPanel(
          of the dataset lie in the box.
           The top 25% of the dataset remains in the upper whisker,
          and the lowest 25% of the dataset remains
-        in the lower whisker."),
+        in the lower whisker. The red point
+        indicates the mean of that particular feature
+        for the particular genre, with the value of the mean
+        displayed next to the feature when the point
+        is hovered over. Hovering over the boxplot reveals
+        the values for the median and the lower
+        and upper quarters, as well as the maximum
+        and minimum."),
       plotlyOutput(outputId = "box_plot", width = "65%",
                     height = "600px", inline = F)
     )

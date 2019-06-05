@@ -92,10 +92,10 @@ server <- function(input, output) {
       limits <- c(min, max)
     }
     ggplotly(ggplot(dataset, aes(x = genre)) +
-      geom_boxplot(aes_string(y = eval(input$feature)), fill = "steelblue",
+      geom_boxplot(aes_string(y = eval(input$feature)), fill = "orange",
                   outlier.size =3, outlier.colour = "purple") +
         stat_summary(mapping =aes_string(y=eval(input$feature)), 
-                     fun.y = mean, geom = "point", colour = "red",na.rm =T) +
+                     fun.y = mean, geom = "point", colour = "darkblue",na.rm =T) +
       labs(
         title =
           paste(str_to_title(input$feature), "for", input$genre,

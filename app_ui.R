@@ -35,8 +35,8 @@ feature_names <- spotify_data_2017_2018 %>%
   ))
 select_values <- colnames(feature_names[3:11])
 
-
-violin_page <- tabPanel(
+#BoxPlotPage
+genre_page <- tabPanel(
   "Genres and Audio Features",
   h1("Correlations with Genre and a Particular Audio Feature",
     style = "font-family: 'Open Sans Condensed', sans-serif;
@@ -77,31 +77,29 @@ violin_page <- tabPanel(
     # Box plot output
     mainPanel(
       p("This chart allows you to analyze and understand
-        how audio features vary from
+         how audio features vary from
         genre to genre in the top songs of 2017 and 2018.
-        You can select which audio
+         You can select which audio
         feature you would like to analyze, and the particular
-        genre you would like to
+         genre you would like to
         view it for. In addition if you would like to compare
-        two particular genres for
+         two particular genres for
         a specific audio feature, you have the option of doing
-        so by checking the box,
+         so by checking the box,
         and choosing the second genre for comparison. The chart
-        axis limits vary with
-        the maximum and minimumvalues of the specific audio feature
-        chosen. This chart
+         axis limits vary with
+        the maximum and minimum values of the specific audio feature
+         chosen. This chart
         helps answer the questionof what makes genres different as
-        well as how the audio
+         well as how the audio
         features of these genres have made them into the top songs
-        of 2017 and 2018.
-        Points in the graph indicate outliers and the middle 50%
-        lie in the box, with
-        the upper 25% in the top half of  the box and the lower
-        25% in the lower half
-        of the box. The top 25% remains in theupper whisker,
-        and the lowest 25% remains
+         of 2017 and 2018.
+        Points in the graph indicate outliers and the middle 50% 
+         of the dataset lie in the box.
+          The top 25% of the dataset remains in the upper whisker,
+         and the lowest 25% of the dataset remains
         in the lower whisker."),
-      plotOutput(outputId = "violin_plot", width = "100%", height = "700px")
+      plotOutput(outputId = "box_plot", width = "100%", height = "600px")
     )
   )
 )
@@ -422,7 +420,7 @@ ui <- navbarPage(
   "Spotify Statistics",
   overview,
   artist_page,
-  violin_page,
+  genre_page,
   feature_panel,
   conclusion
 )

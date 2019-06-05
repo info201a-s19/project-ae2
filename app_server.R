@@ -96,7 +96,7 @@ server <- function(input, output) {
       labs(
         title =
           paste(str_to_title(input$feature), "for", input$genre,
-            second_genre, "in 2017 and 2018",
+             second_genre, "in 2017 and 2018",
             sep = " "
           ),
         subtitle = paste("# Observations:", nrow(violin_plot_data()),
@@ -110,7 +110,7 @@ server <- function(input, output) {
       scale_y_continuous(limits = y_limits(input$feature, dataset)) +
       # Assign characteristics to titles in plot
       theme(
-        plot.title = element_text(size = 26, face = "bold"),
+        plot.title = element_text(size = 24, face = "bold"),
         plot.subtitle = element_text(size = 18),
         axis.title = element_text(size = 14, face = "bold"),
         axis.text = element_text(size = 14),

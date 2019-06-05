@@ -111,8 +111,7 @@ server <- function(input, output) {
         plot.title = element_text(size = 18, face = "bold"),
         plot.subtitle = element_text(size = 10),
         axis.title = element_text(size = 10, face = "bold"),
-        axis.text = element_text(size = 10),
-        aspect.ratio = 1
+        axis.text = element_text(size = 10)
       ), animate = F)
   })
 

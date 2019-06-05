@@ -106,7 +106,7 @@ genre_page <- tabPanel(
         the values for the median and the lower
         and upper quarters, as well as the maximum
         and minimum."),
-      plotlyOutput(outputId = "box_plot", width = "65%",
+      plotlyOutput(outputId = "box_plot", width = "85%",
                     height = "600px", inline = F)
     )
   )

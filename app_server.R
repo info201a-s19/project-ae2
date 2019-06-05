@@ -99,14 +99,13 @@ server <- function(input, output) {
         na.rm = T
       ) +
       labs(
-        title =
-          paste(str_to_title(input$feature), "for", input$genre,
+        title = paste(str_to_title(input$feature), "for",
+              input$genre,
             second_genre,
             sep = " "
           ),
         x = "Genre",
-        y = str_to_title(input$feature)
-        ) +
+        y = str_to_title(input$feature)) +
       scale_y_continuous(limits = y_limits(input$feature, dataset)) +
       # Assign characteristics to titles in plot
       theme(
@@ -153,7 +152,7 @@ server <- function(input, output) {
       "Instrumentalness" = round( (mean(instrumentalness) / 1), 2),
       "Liveness" = round( (mean(liveness) / 1), 2),
       "Valence" = round( (mean(valence) / 1), 2),
-      "Tempo" = round(mean(tempo), 2)
+      "Tempo" = round( mean(tempo), 2)
     )
     return(importance)
   })

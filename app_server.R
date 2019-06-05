@@ -54,13 +54,13 @@ server <- function(input, output) {
   )
   # What is the distribution for an audio feature
   # for a particular genre(e.g.pop)? How does it compare to another genre?
-  # Load necessary packages
 
-  # Data set for first violin plot based on first genre chosen
+  # Data set for first box plot based on first genre chosen
   violin_plot_data <- reactive({
     spotify_data_for_plot %>%
       filter(genre == input$genre)
   })
+  # Data set for second box plot based on second genre chosen
   violin_plot_data_second_genre <- reactive({
     spotify_data_for_plot %>%
       filter(genre == input$second_genre)

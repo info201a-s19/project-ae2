@@ -78,18 +78,15 @@ server <- function(input, output) {
     if (input$add_genre == T) {
       dataset <- violin_plot_data_both() 
       second_genre <- paste("and ", input$second_genre)
-      obs <- nrow(violin_plot_data_second_genre())
-      obs_second_genre <- paste("and", obs, "for", input$second_genre, sep = " ")
     } else {
       dataset <- violin_plot_data()
       second_genre <- ""
-      obs_second_genre <- ""
     }
     # Function for limits for y axis based on feature chosen
     y_limits <- function(feature, dataframe) {
       min <- min(dataframe[feature], na.rm = T)
       max <- max(dataframe[feature], na.rm = T)
-      limits <- c(min, max)
+      c(min, max)
     }
     ggplotly(ggplot(dataset, aes(x = genre)) +
       geom_boxplot(aes_string(y = eval(input$feature)), fill = "orange",

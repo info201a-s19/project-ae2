@@ -40,58 +40,63 @@ my_server <- function(input, output) {
   #Data set for first violin plot based on first genre chosen
   violin_plot_data <- reactive({
     spotify_data_for_plot %>%
-      filter(genre == input$genre)
-  })
+      filter(genre == input$genre) 
+  }) 
+  
+  
   #Data set for second violin plot based on second genre chosen
   violin_plot_data_second_genre <- reactive({
     spotify_data_for_plot %>%
       filter(genre == input$second_genre)
   })
-  #First Violin plot
+
+  #DataSet with both genres user chose
+  violin_plot_data_both <- reactive ({
+    rbind(violin_plot_data(), violin_plot_data_second_genre())
+  })
+  
+  #BoxPlot for Genre(s) and Particular Feature
   output$violin_plot <- renderPlot({
-    ggplot(data = violin_plot_data(), aes(x = genre)) +
-      geom_violin(aes_string(y = eval(input$feature)), fill = "steelblue") +
-      labs(
-        title = paste(str_to_title(input$feature), " for ", input$genre,
-          " in 2017 and 2018",
-          sep = ""
+    # If statement for whether user wants to compare data with another genre, and altering
+    # plot if they want to
+    if (input$add_genre == T) {
+      dataset <- violin_plot_data_both()
+      second_genre <- paste ("and ", input$second_genre)
+      obs <- nrow(violin_plot_data_second_genre())
+      obs_second_genre <- paste("and", obs,"for", input$second_genre, sep = " ")
+    } else {
+      dataset <- violin_plot_data()
+      second_genre <- ""
+      obs_second_genre <- ""
+    }
+    #Function for limits for y axis based on feature chosen
+      y_limits <- function(feature,dataframe) {
+        min <- min(dataframe[feature],na.rm = T)
+        max <- max(dataframe[feature],na.rm = T)
+        limits <- c(min, max)
+      }
+    ggplot(dataset, aes(x = genre)) +
+      geom_boxplot(aes_string(y = eval(input$feature)), fill = "steelblue") +
+      labs(title =
+              paste(str_to_title(input$feature), "for", input$genre,
+              second_genre, "in 2017 and 2018", sep = " "
         ),
+        subtitle = paste("# Observations:", nrow(violin_plot_data()),
+                         "for", input$genre,
+                         obs_second_genre, sep = " "),
         x = "Genre",
         y = str_to_title(input$feature)
       ) +
+      scale_y_continuous(limits = y_limits(input$feature,dataset)) +
       # Assign characteristics to titles in plot
       theme(
         plot.title = element_text(size = 26, face = "bold"),
+        plot.subtitle = element_text(size = 18),
         axis.title = element_text(size = 14, face = "bold"),
         axis.text = element_text(size = 14),
         legend.text = element_text(size = 14),
         legend.title = element_text(size = 14, face = "bold"),
         aspect.ratio = 1
       )
-  })
-  #Second Violin Plot, if user wants to compare
-  output$violin_plot_2 <- renderPlot({
-    if (input$add_genre == T) {
-      ggplot(data = violin_plot_data_second_genre(), aes(x = genre)) +
-        geom_violin(aes_string(y = eval(input$feature)), fill = "steelblue") +
-        labs(
-          title = paste(str_to_title(input$feature),
-            " for ", input$second_genre,
-            " in 2017 and 2018",
-            sep = ""
-          ),
-          x = "Genre",
-          y = str_to_title(input$feature)
-        ) +
-        #Text Characteristics added to Plot
-        theme(
-          plot.title = element_text(size = 26, face = "bold"),
-          axis.title = element_text(size = 14, face = "bold"),
-          axis.text = element_text(size = 14),
-          legend.text = element_text(size = 14),
-          legend.title = element_text(size = 14, face = "bold"),
-          aspect.ratio = 1
-        )
-    }
   })
 }

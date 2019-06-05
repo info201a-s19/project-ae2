@@ -394,6 +394,61 @@ conclusion <- tabPanel(
       terms and categories may yield further insight."
     ),
     tableOutput("importance_table"),
+    
+    h1("Dancing = Happy? Energy = Loud?",
+       style = "font-family: 'Open Sans Condensed', sans-serif;
+       font-weight: 1000; line-height: 1.1; 
+       color: #4d3a7d;"
+    ),
+    p("Based on the holistic raw data, based on our metrics, we've shown that
+      high prioritization of finding the perfect balance
+      of danceability and energy is a key shared trait common to many songs, not
+      just in the top charts but out of all Spotify tracks. However, one may
+      wonder how those tie into the other audio features. Looking at Spotify's
+      definitions, at first glance, it seems logical that some features may
+      interact with or conflict with others -- for example, high speechiness
+      should, according to common logic, correspond to a low instrumentalness.
+      Applying this to what we've found earlier may yield additional features
+      or 'constraints' that supplement the appeal of danceability and energy."),
+    p("Looking through all possible combinations of feature comparisons on the
+      scatterplot on page 4 reveals two significant correlations that stand out
+      from the rest. Many combinations show few to zero signs of a strong
+      relation, yielding a seemingly random and uniform cloud of points without
+      meaning -- yet, looking at our top features, we find something
+      interesting: namely, in the relation between valence and danceability,
+      and in loudness and energy, the graphs of which are reproduced below
+      for your convenience:"),
+    plotlyOutput("dancehappy"),
+    p(br(), "Taking danceability as the x-variable, we can see how increasing the
+      level of danceability across the top charts leads to a strong linear
+      correlation with an increase of valence, or more colloquially,
+      'song happiness'. Thus, we are able to further refine our numerical
+      categorization of what makes the top charts so sucessfull, by finding
+      secondary relations within the feature observations -- namely, the
+      importance (or at least current trend) of releasing songs that people
+      can dance to in a not sad way."),
+    plotlyOutput("energyloud"),
+    p(br(), "Similarly, we can look at loudness as a function of energy, and find an
+      even stronger correlation: as energy goes up, so does overall track
+      loudness -- a conclusion that some may find trivially obvious, but is
+      demonstrated to be supported via many people's personal experience. If a
+      song is a hype, lit, energetic banger, the listener is gonna want to
+      crank it and jam out. No one who's ever intentionally listened to Meek
+      Mill has thought 'Wow this is so energetic, I better turn down the
+      volume so it's more enjoyable!'"),
+    p("These correlations, however, may not truly reflect trends that define
+      a successful track. It is important to keep in mind that these are only
+      passive observations of an existing data frame, and that we may just be
+      imposing imaginary relations between independent features and
+      observations. Such is the issue with attempting to categorize a
+      subjective and emotional art form such as music with quantitative,
+      numerical data. The definitions may be too vague; Spotify may have an
+      algorithm that defines values differently than how listeners would;
+      the trends that we observe could be nothing but coincidence rather than
+      some unique insight into the current state of music pop culture. That is
+      why we may need to lean further from pure numbers and incorporate a
+      certain level of subjectivity into this evaluation -- genres."),
+    
 
     h1("What Does Pop Even Stand For?",
       style = "font-family: 'Open Sans Condensed', sans-serif;
@@ -409,7 +464,7 @@ conclusion <- tabPanel(
       These four genres account for over 80% of the top charts, and,
       unsurprisingly, these genres include songs with high energy, high
       danceability, and low instrumentalness. (To further explore distributions
-      of audio features within genres, see the box plots on page 3."),
+      of audio features within genres, see the box plots on page 3.)"),
     p("This indicates a current imbalance within the world of music pop culture.
       Based on this imbalance, we might conclude that for success, a track or 
       song should have not only high danceability and energy, but should also
@@ -419,7 +474,17 @@ conclusion <- tabPanel(
       culture views country music with."),
     p("This leads us closer to being able to define what makes a successful
       song -- however, it still doesn't explain the songs that yet still don't
-      fit this categorization. ")
+      fit this categorization. And we may not ever be able to. As mentined
+      above, applying such a scientific and mathematical model onto a form of
+      personal human expression may never be a successful venture."),
+    p("However, we've attempted to do so, albeit on a rather superficial level.
+      It revealed some insights that allow us to superimpose basic number
+      quantifications on the top 200 tracks of the past two years and to
+      discover relations and common trends, but beyond that, we cannot strongly
+      or conclusively claim our takeaways to be absolute fact, as a law of
+      art and human psychology, rather than just coincidental impositions of
+      trends that we create instead of discover. But hey, it's still pretty
+      interesting -- perhaps we might actually be on to something.")
   )
 )
 

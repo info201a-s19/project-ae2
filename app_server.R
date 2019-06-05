@@ -171,4 +171,42 @@ server <- function(input, output) {
         aes(x = Genre, y = Instances, label = Instances, vjust = -1)
       )
   })
+  output$dancehappy <- renderPlotly({
+    title <- "Song Danceability v.s. Valence"
+    
+    demo_plot <- ggplotly(ggplot(feature_names) +
+                            geom_point(
+                              mapping = aes_string(
+                                x = spotify_data_2017_2018$danceability,
+                                y = spotify_data_2017_2018$valence,
+                                color = "Genre",
+                                group = "Artists"
+                              )
+                            ) +
+                            labs(x = "Danceability",
+                                 y = "Valence",
+                                 title = title) +
+                            theme(plot.title = element_text(hjust = 0.5)))
+    
+    demo_plot
+  })
+  output$energyloud <- renderPlotly({
+    title <- "Song Energy v.s. Loudness"
+    
+    demo_plot <- ggplotly(ggplot(feature_names) +
+                            geom_point(
+                              mapping = aes_string(
+                                x = spotify_data_2017_2018$energy,
+                                y = spotify_data_2017_2018$loudness,
+                                color = "Genre",
+                                group = "Artists"
+                              )
+                            ) +
+                            labs(x = "Energy",
+                                 y = "Loudness",
+                                 title = title) +
+                            theme(plot.title = element_text(hjust = 0.5)))
+    
+    demo_plot
+  })
 }

@@ -3,7 +3,8 @@ library("ggplot2")
 library(stringr)
 library(dplyr)
 library(plotly)
-
+library(lintr)
+library(styler)
 # for violin plot
 
 spotify_data_2017_2018 <- read.csv("data/2018_2017_combined.csv",
@@ -20,14 +21,15 @@ spotify_data_for_plot <- spotify_data_2017_2018 %>%
     genre != "Future-bass" & genre != "Tropical House"
   & genre != "Rap")
 
-#For Feature Plot
+# For Feature Plot
 feature_names <- spotify_data_2017_2018 %>%
   select(
-    name, artists, danceability, energy, loudness, 
+    name, artists, danceability, energy, loudness,
     speechiness, acousticness, instrumentalness, liveness, valence,
-    tempo, genre) %>%
+    tempo, genre
+  ) %>%
   `colnames<-`(c(
-    "Name", "Artists", "Danceability", "Energy", "Loudness", "Speechiness", 
+    "Name", "Artists", "Danceability", "Energy", "Loudness", "Speechiness",
     "Acousticness", "Instrumentalness",
     "Liveness", "Valence", "Tempo", "Genre"
   ))
@@ -36,7 +38,11 @@ select_values <- colnames(feature_names[3:11])
 
 violin_page <- tabPanel(
   "Genres and Audio Features",
-  titlePanel("Correlations with Genre and a Particular Audio Feature"),
+  h1("Correlations with Genre and a Particular Audio Feature",
+    style = "font-family: 'Open Sans Condensed', sans-serif;
+       font-weight: 1000; line-height: 1.1;
+     color: #4d3a7d;"
+  ),
   sidebarLayout(
     sidebarPanel(
       # Widget to choose audio feature for y axis
@@ -72,48 +78,59 @@ violin_page <- tabPanel(
     mainPanel(
       plotOutput(outputId = "violin_plot", width = "100%", height = "700px"),
       plotOutput(outputId = "violin_plot_2", width = "100%", height = "700px")
-    )))
+    )
+  )
+)
 
-artist_page <-  tabPanel(
+artist_page <- tabPanel(
   "Top 10 Artists Details",
-  titlePanel("Average Features of the Top 10 Artists"),
+  h1("Average Features of the Top 10 Artists",
+    style = "font-family: 'Open Sans Condensed', sans-serif;
+       font-weight: 1000; line-height: 1.1;
+       color: #4d3a7d;"
+  ),
   sidebarLayout(
     sidebarPanel(
       radioButtons("features",
-                   label = ("Choose a feature"),
-                   choices = c(
-                     "Danceability" = "danceability",
-                     "Energy" = "energy",
-                     "Loudness" = "loudness",
-                     "Speechiness" = "speechiness",
-                     "Acousticness" = "acousticness",
-                     "Instrumentalness" = "instrumentalness",
-                     "Liveness" = "liveness",
-                     "Valence" = "valence",
-                     "Tempo" = "tempo",
-                     "Duration" = "duration_ms"
-                   )
+        label = ("Choose a feature"),
+        choices = c(
+          "Danceability" = "danceability",
+          "Energy" = "energy",
+          "Loudness" = "loudness",
+          "Speechiness" = "speechiness",
+          "Acousticness" = "acousticness",
+          "Instrumentalness" = "instrumentalness",
+          "Liveness" = "liveness",
+          "Valence" = "valence",
+          "Tempo" = "tempo",
+          "Duration" = "duration_ms"
+        )
       )
     ),
     mainPanel(
       p("To further understand why the top artists had so many songs in the charts, 
         we decided to analyze common trends among the features for their songs by finding
-        the feature mean for the songs each top artist had. There are thirteen artists total in the 'Top 10' 
-        artists because the last 9 artists all have four songs in the charts. The histogram below compares the 
+        the feature mean for the songs each top artist had. There are thirteen artists total in the 'Top 10'
+        artists because the last 9 artists all have four songs in the charts. The histogram below compares the
         average of the features of the songs each artist had in the 2017 and 2018 charts. The type of feature
         for comparison can be chosen by the radio buttons and each color represents a different artist "),
       plotlyOutput("histogram"),
-      h4(strong("Feature explanations")),
-      p(strong("Danceability: "), "Danceability describes how suitable a track is for dancing based on a combination of musical elements
-        including tempo, rhythm stability, beat strength, and overall regularity. 
+      h4(strong("Feature explanations"),
+        style = "font-family: 'Open Sans Condensed', sans-serif;
+       font-weight: 1000; line-height: 1.1; 
+       color: #4d3a7d;"
+      ),
+      p(
+        strong("Danceability: "), "Danceability describes how suitable a track is for dancing based on a combination of musical elements
+        including tempo, rhythm stability, beat strength, and overall regularity.
         A value of 0.0 is least danceable and 1.0 is most danceable.",
-        br(), strong("Energy: "), "Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. 
+        br(), strong("Energy: "), "Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity.
         Typically, energetic tracks feel fast, loud, and noisy",
         br(), strong("Loudness: "), "The overall loudness of a track in decibels (dB).
         Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks",
         br(), strong("Speechiness: "), "Speechiness detects the presence of spoken words in a track. 
-        The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.", 
-        br(), strong("Acousticness: "),	"A confidence measure from 0.0 to 1.0 of whether the track is acoustic.
+        The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.",
+        br(), strong("Acousticness: "), "A confidence measure from 0.0 to 1.0 of whether the track is acoustic.
         1.0 represents high confidence the track is acoustic.",
         br(), strong("Instrumentalness: "), "Predicts whether a track contains no vocals. 'Ooh' and 'aah' sounds are treated as instrumental in this context.
         Rap or spoken word tracks are clearly 'vocal'. The closer the instrumentalness value is to 1.0, 
@@ -121,57 +138,103 @@ artist_page <-  tabPanel(
         br(), strong("Liveness: "), "Detects the presence of an audience in the recording.
         Higher liveness values represent an increased probability that the track was performed live.
         A value above 0.8 provides strong likelihood that the track is live.",
-        br(), strong("Valence: "),	"A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. 
+        br(), strong("Valence: "), "A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. 
         Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), 
         while tracks with low valence sound more negative (e.g. sad, depressed, angry)",
         br(), strong("Tempo: "), "The overall estimated tempo of a track in beats per minute (BPM)",
-        br(), strong("Duration: "), "The duration of the track in milliseconds")
+        br(), strong("Duration: "), "The duration of the track in milliseconds"
+      )
     )
   )
 )
 
-#Feature Analysis Panel
-  x_input <- selectInput(
-    "x_var",
-    label = "X Variable",
-    choices = select_values,
-    selected = "Danceability"
-  )
-  
-  y_input <- selectInput(
-    "y_var",
-    label = "Y Variable",
-    choices = select_values,
-    selected = "Loudness"
-  )
-  
-  size_input <- sliderInput(
-    "size",
-    label = "Size of point", min = 1, max = 10, value = 2
-  )
-  feature_sidebar_content <- sidebarPanel(
-    x_input,
-    y_input,
-    size_input
-  )
-  feature_main_content <- mainPanel(
-    plotlyOutput("featuredemo")
-  )
-  feature_panel <- tabPanel(
-    "Song Feature Analysis",
-    titlePanel("Song Feature Comparison of Top 100 Songs from 2017 and 2018"),
-    sidebarLayout(
-      feature_sidebar_content,
-      feature_main_content
-    )
-  )
-  
-img_link <- paste0("https://storage.googleapis.com/pr-newsroom-wp/1/2018/12/",
-                    "Spotify_Wrapped_Infographic_header-copy-1920x733.jpg")
+# Feature Analysis Panel
+x_input <- selectInput(
+  "x_var",
+  label = "X Variable",
+  choices = select_values,
+  selected = "Danceability"
+)
 
-header_font <- paste0("https://fonts.googleapis.com/css?family=",
-                      "Open+Sans+Condensed:300&display=swap")
-  
+y_input <- selectInput(
+  "y_var",
+  label = "Y Variable",
+  choices = select_values,
+  selected = "Loudness"
+)
+
+size_input <- sliderInput(
+  "size",
+  label = "Size of point", min = 1, max = 10, value = 2
+)
+feature_sidebar_content <- sidebarPanel(
+  x_input,
+  y_input,
+  size_input
+)
+feature_main_content <- mainPanel(
+  p("This chart allows you to explore the relationship of features among the 
+    top songs from the years 2017 and 2018. You can select differing features 
+    to see how they relate to one another and draw insights as to what features
+    make the most popular songs of the past two years. You can also set both 
+    axes to the same variable to explore the song artists and genres that 
+    correspond to the different ends of a particular feature. This answers the
+    questions of what features are most common in popular songs, and what are
+    common features of certain genres. Hover over chart for more details about 
+    point."),
+  plotlyOutput("featuredemo"),
+  h4(strong("Feature explanations"),
+    style = "font-family: 'Open Sans Condensed', sans-serif;
+       font-weight: 1000; line-height: 1.1; 
+     color: #4d3a7d;"
+  ),
+  p(
+    strong("Danceability: "), "Danceability describes how suitable a track is for dancing based on a combination of musical elements
+      including tempo, rhythm stability, beat strength, and overall regularity. 
+      A value of 0.0 is least danceable and 1.0 is most danceable.",
+    br(), strong("Energy: "), "Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. 
+      Typically, energetic tracks feel fast, loud, and noisy",
+    br(), strong("Loudness: "), "How loud a track is in decibels, range from -60 to 0 db.
+      Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks",
+    br(), strong("Speechiness: "), "Speechiness measure of presence of spoken words in track, from 0 to 1
+      0.66 and above is all spoken words, 0.33-0.66 is music and speech, and below 0.33 is music.",
+    br(), strong("Acousticness: "), "A confidence measure from 0.0 to 1.0 of whether the track is acoustic.
+      1.0 represents high confidence the track is acoustic.",
+    br(), strong("Instrumentalness: "), "Predicts whether a track contains no vocals. 'Ooh' and 'aah' sounds are treated as instrumental in this context.
+      Rap or spoken word tracks are clearly 'vocal'. The closer the instrumentalness value is to 1.0, 
+      the greater likelihood the track contains no vocal content. ",
+    br(), strong("Liveness: "), "Detects the presence of an audience in the recording.
+      Higher liveness values represent an increased probability that the track was performed live.
+      A value above 0.8 provides strong likelihood that the track is live.",
+    br(), strong("Valence: "), "A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. 
+      Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), 
+      while tracks with low valence sound more negative (e.g. sad, depressed, angry)",
+    br(), strong("Tempo: "), "The overall estimated tempo of a track in beats per minute (BPM)"
+  )
+)
+feature_panel <- tabPanel(
+  "Song Feature Analysis",
+  h1("Song Feature Comparison of Top 100 Songs from 2017 and 2018",
+    style = "font-family: 'Open Sans Condensed', sans-serif;
+             font-weight: 1000; line-height: 1.1; 
+             color: #4d3a7d;"
+  ),
+  sidebarLayout(
+    feature_sidebar_content,
+    feature_main_content
+  )
+)
+
+img_link <- paste0(
+  "https://storage.googleapis.com/pr-newsroom-wp/1/2018/12/",
+  "Spotify_Wrapped_Infographic_header-copy-1920x733.jpg"
+)
+
+header_font <- paste0(
+  "https://fonts.googleapis.com/css?family=",
+  "Open+Sans+Condensed:300&display=swap"
+)
+
 overview <- tabPanel(
   "Overview",
   fluidPage(
@@ -179,18 +242,21 @@ overview <- tabPanel(
     tags$head(
       tags$style(HTML(
         paste0("@import url('", header_font, "');")
-        )
-      )
+      ))
     ),
     # Img from hyperlink
-    img(src = img_link,
-        width = "75%",
-        height = "25%"),
+    img(
+      src = img_link,
+      width = "75%",
+      height = "25%"
+    ),
     h1("Analyzing the Top 100 Spotify Songs of 2017 & 2018",
-       style = "font-family: 'Open Sans Condensed', sans-serif;
+      style = "font-family: 'Open Sans Condensed', sans-serif;
        font-weight: 1000; line-height: 1.1; 
-       color: #4d3a7d;"),
-    p("The music industry generated nearly $52 Billion USD globally in 2018,
+       color: #4d3a7d;"
+    ),
+    p(
+      "The music industry generated nearly $52 Billion USD globally in 2018,
       with almost 40% of that coming from the US alone",
       a(href = "https://www.statista.com/topics/1639/music/", "(source),"),
       "making it a key contributor to a world economy, along with other aspects 
@@ -200,7 +266,8 @@ overview <- tabPanel(
       just seem to top the charts year after year after year. We wondered what
       makes these tracks so notable, and thus, have created this report in
       hopes to decipher any trends or correlations that may point to a formula
-      for success amidst, if one does exist."),
+      for success amidst, if one does exist."
+    ),
     p("We chose music as a topic because of its prevalence: its reach is very
       widespread and ubiquitous, with music and audio pop culture reaching every
       aspect of everyday life. People everywhere at some point in their day will
@@ -210,20 +277,28 @@ overview <- tabPanel(
       attempts to breakdown the top tracks of the past two years to gain some
       more objective insight into the key audio features that define a track,
       as defined by Spotify."),
-    p("The data used in this analysis comes originally from the Spotify API,
+    p(
+      "The data used in this analysis comes originally from the Spotify API,
       where spotify defined and calculated all track features/attributes.
       However, we sourced the information from Nadin Tamer on Kaggle, combining
       datasets from 2017 and 2018 and adding a column for song genre. Kaggle
       sources can be found ",
-      a(href = "https://www.kaggle.com/nadintamer/top-spotify-tracks-of-2018",
-        "here (2017)"),
+      a(
+        href = "https://www.kaggle.com/nadintamer/top-spotify-tracks-of-2018",
+        "here (2017)"
+      ),
       " and ",
-      a(href = "https://www.kaggle.com/nadintamer/top-spotify-tracks-of-2018",
-        "here (2018)"),
+      a(
+        href = "https://www.kaggle.com/nadintamer/top-spotify-tracks-of-2018",
+        "here (2018)"
+      ),
       ", with more detailed attribute definitions from Spotify",
-      a(href = 
+      a(
+        href =
           "https://developer.spotify.com/documentation/web-api/
-        reference/tracks/get-audio-features/", "here."))
+        reference/tracks/get-audio-features/", "here."
+      )
+    )
   )
 )
 
@@ -233,15 +308,16 @@ conclusion <- tabPanel(
     # CSS font
     tags$head(
       tags$style(HTML(
-        paste0("@import url('", header_font, "');",
-               "h1 {font-family: 'Open Sans Condensed', sans-serif;
+        paste0(
+          "@import url('", header_font, "');",
+          "h1 {font-family: 'Open Sans Condensed', sans-serif;
                font-weight: 1000; line-height: 1.1; 
                color: #4d3a7d;}
                p {font-family: 'Tahoma';
                font-weight: 250; line-height: 1.1; 
-               color: #4d3a7d;")
+               color: #4d3a7d;"
         )
-      )
+      ))
     ),
     # CSS font apply
     h1(strong("Dancing to the Top")),
@@ -268,27 +344,32 @@ conclusion <- tabPanel(
       we also find that maximizing danceability and energy is not the key
       either -- having a moderation is most common and correspondingly most
       popular."),
-    img(src = "https://developer.spotify.com/assets/audio/danceability.png",
-        width = "75%", height = "50%"),
+    img(
+      src = "https://developer.spotify.com/assets/audio/danceability.png",
+      width = "75%", height = "50%"
+    ),
     p("Similarly, we find that instrumentalness is the lowest importance.
       Popular songs are songs that people can interact with -- namely, dancing
       and singing. Songs with high instumentalness. For example, classical 
       music, which has a very high level of instrumentalness, is harder for
       people to interact with, and therefore less popular (nightclubs don't
       play Mozart and Beethoven to get the people going)."),
-    p("Furthermore, this also indicates that there are other factors that
+    p(
+      "Furthermore, this also indicates that there are other factors that
       define a successful song. There are songs with low energy and danceability
       that still manage to hit the top 100, such as James Arthur's",
       em("Say You Won't Let Go"),
       ". While the success of a song may not be able to be defined purely
       numerically and quanitatively, looking at broader, less rigidly-defined
-      terms and categories may yield further insight."),
+      terms and categories may yield further insight."
+    ),
     tableOutput("importance_table"),
-    
+
     h1("What Does Pop Even Stand For?",
-       style = "font-family: 'Open Sans Condensed', sans-serif;
+      style = "font-family: 'Open Sans Condensed', sans-serif;
        font-weight: 1000; line-height: 1.1; 
-       color: #4d3a7d;"),
+       color: #4d3a7d;"
+    ),
     p("It should come as no surprise that in the past few years, pop has
       has reigned supreme in the genre charts. "),
     plotOutput("genre_count"),
@@ -311,7 +392,7 @@ conclusion <- tabPanel(
       fit this categorization. ")
   )
 )
-  
+
 # Define UI for application
 ui <- navbarPage(
   "Spotify Statistics",
